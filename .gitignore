@@ -1,0 +1,3 @@
+# some stuff to ignore in git :
+venv/
+.idea
