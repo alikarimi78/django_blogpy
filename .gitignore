@@ -1,3 +1,6 @@
 # some stuff to ignore in git :
 venv/
 .idea
+blog/migrations/
+blogpy/admin/
+blogpy/ckeditor
