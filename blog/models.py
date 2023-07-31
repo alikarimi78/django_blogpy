@@ -11,5 +11,3 @@ class Article(models.Model):
     category = models.CharField(max_length=128, null=False, blank=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.title

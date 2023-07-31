@@ -3,4 +3,4 @@ venv/
 .idea
 blog/migrations/
 blogpy/admin/
-blogpy/ckeditor
+blogpy/ckeditor/
