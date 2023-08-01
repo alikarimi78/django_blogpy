@@ -3,10 +3,10 @@
 }
 
 #container{
-    width: 1500px;
-    height: 800px;
+    width: fit-content;
+    height: 450px;
     background-color: #00B0E8;
-    border: solid red 2px;
+    border: solid blue 2px;
 }
 
 .divs{

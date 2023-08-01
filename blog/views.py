@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import *
 
@@ -22,3 +22,18 @@ class IndexPage(TemplateView):
             "article_data": article_data
         }
         return render(request, "index.html", context)
+
+
+class CreateArticle(TemplateView):
+    template_name = "create_article.html"
+
+    def get(self, request, **kwargs):
+        form = ArticleForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, **kwargs):
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')  # Redirect to the home page after successful form submission
+        return render(request, self.template_name, {'form': form})

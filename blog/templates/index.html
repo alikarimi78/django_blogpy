@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="../../static/index.css">
 </head>
 <body id="main_body">
 <div id="container">
@@ -14,6 +14,9 @@
         <p>{{ article.content }}</p>
         </div>
     {%  endfor %}
-</div>
+</div><br>
+<a href="{% url "create_article" %}" title="CreateArticle">create your own article</a>
+
+
 </body>
 </html>
