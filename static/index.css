@@ -1,0 +1,14 @@
+#main_body{
+    background-color: #7ea2b4;
+}
+
+#container{
+    width: 1500px;
+    height: 800px;
+    background-color: #00B0E8;
+    border: solid red 2px;
+}
+
+.divs{
+    border: solid green 1px;
+}

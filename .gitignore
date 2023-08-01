@@ -4,3 +4,4 @@ venv/
 blog/migrations/
 blogpy/admin/
 blogpy/ckeditor/
+staticfiles/
