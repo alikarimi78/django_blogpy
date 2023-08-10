@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import *
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
+from .serializer import ArticleSerializer
+from .exclusive_permission import IsSuperUser, IsAuthorOrReadOnly
 
 
 class IndexPage(TemplateView):
@@ -37,3 +40,20 @@ class CreateArticle(TemplateView):
             form.save()
             return redirect('index')  # Redirect to the home page after successful form submission
         return render(request, self.template_name, {'form': form})
+
+
+class ArticleCreatePIView(CreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+class ArticleListPIView(ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+
+
+class ArticleRUDAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    lookup_field = 'pk'
+    permission_classes = (IsAuthorOrReadOnly,)
