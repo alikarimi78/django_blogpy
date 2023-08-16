@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from .models import *
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView
-from .serializer import ArticleSerializer
-from .exclusive_permission import IsSuperUser, IsAuthorOrReadOnly
+from .serializer import ArticleSerializer, UserProfileSerializer, AdminArticleSerializer
+from .exclusive_permission import IsAuthorOrAdmin
+from rest_framework.permissions import IsAdminUser
 
 
 class IndexPage(TemplateView):
@@ -56,4 +57,16 @@ class ArticleRUDAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     lookup_field = 'pk'
-    permission_classes = (IsAuthorOrReadOnly,)
+    permission_classes = (IsAuthorOrAdmin,)
+
+
+class AdminUserProfileUpdateAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = (IsAdminUser,)
+
+
+class AdminArticleUpdateAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = AdminArticleSerializer
+    permission_classes = (IsAdminUser,)

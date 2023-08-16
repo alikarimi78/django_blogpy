@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission, SAFE_METHODS
+from rest_framework.permissions import BasePermission
 from django.http import HttpRequest
 from .models import Article
 
@@ -10,10 +10,13 @@ class IsSuperUser(BasePermission):
         )
 
 
-class IsAuthorOrReadOnly(BasePermission):
+class IsAuthorOrAdmin(BasePermission):
+
     def has_object_permission(self, request: HttpRequest, view, obj: Article):
+        if request.method in ["GET", "HEAD", "OPTIONS"]:
+            return True
+
         return bool(
             request.user.is_superuser or
-            obj.author == request.user
-
+            (obj.author.user == request.user)
         )
