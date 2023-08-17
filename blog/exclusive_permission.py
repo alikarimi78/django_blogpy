@@ -13,9 +13,6 @@ class IsSuperUser(BasePermission):
 class IsAuthorOrAdmin(BasePermission):
 
     def has_object_permission(self, request: HttpRequest, view, obj: Article):
-        if request.method in ["GET", "HEAD", "OPTIONS"]:
-            return True
-
         return bool(
             request.user.is_superuser or
             (obj.author.user == request.user)
