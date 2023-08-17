@@ -18,7 +18,7 @@ class IndexPage(TemplateView):
                     "title": article.title,
                     "category": article.category,
                     "created_at": article.created_at,
-                    "author": article.author.first_name,
+                    "author": article.author.user.first_name,
                     "content": article.content,
                 }
             )
