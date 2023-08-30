@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}
+        OSM map
+    {% endblock %}</title>
+    {% block header_references %}
+        <link rel="stylesheet" href="{% static 'map/ol.css' %}">
+        <link rel="stylesheet" href="{% static 'map/map_style.css' %}">
+        <script src="{% static 'map/ol.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <div id="map_container"></div>
+    <script>
+        let osm_layer = new ol.layer.Tile
+        ({
+            source: new ol.source.XYZ
+            ({
+                url: 'https://tile.openstreetmap.bzh/br/{z}/{x}/{y}.png'
+            }),
+            visible: true
+        });
+
+        let sampleView = new ol.View({
+            center: [51, 32],
+            zoom: 6,
+            projection: 'EPSG:4326'
+        });
+        let map = new ol.Map({
+            layers: [osm_layer],
+            target: "map_container",
+            view: sampleView
+
+        })
+
+        map.addControl(new ol.control.ZoomSlider());
+
+    </script>
+{% endblock %}
+</body>
+</html>
+

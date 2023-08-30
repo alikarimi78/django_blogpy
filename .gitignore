@@ -5,3 +5,5 @@ blog/migrations/
 blogpy/admin/
 blogpy/ckeditor/
 staticfiles/
+map/migrations
+map/static
