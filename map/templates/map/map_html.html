@@ -15,8 +15,11 @@
 </head>
 <body>
 {% block content %}
+
     <div id="map_container"></div>
+
     <script>
+
         let osm_layer = new ol.layer.Tile
         ({
             source: new ol.source.XYZ
@@ -26,21 +29,39 @@
             visible: true
         });
 
+        const geotiffLayer = new ol.layer.Image({
+            source: new ol.source.ImageWMS({
+                url: 'http://localhost:8080/geoserver/testing_workspace/wms', // GeoTIFF WMS URL
+                params: {
+                    'LAYERS': 'testing_workspace:fortest',
+                    'TILED': false, // You can adjust this based on your GeoServer configuration
+                },
+            }),
+            title: 'GeoTIFF Layer'
+        });
+
         let sampleView = new ol.View({
             center: [51, 32],
             zoom: 6,
             projection: 'EPSG:4326'
         });
+
+
         let map = new ol.Map({
-            layers: [osm_layer],
+            layers: [osm_layer, geotiffLayer],
             target: "map_container",
             view: sampleView
 
         })
 
+        // Add the LayerSwitcher to the map's control panel
+
         map.addControl(new ol.control.ZoomSlider());
 
     </script>
+
+
+
 {% endblock %}
 </body>
 </html>

@@ -7,3 +7,4 @@ blogpy/ckeditor/
 staticfiles/
 map/migrations
 map/static
+media/

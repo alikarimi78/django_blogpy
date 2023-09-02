@@ -24,6 +24,12 @@ SECRET_KEY = 'django-insecure-6rz7#d)q7m&m+b73r@1vzqui0@#@rwn9xt^szdr)^!%6-pcxyp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:9000",
+]
+
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -57,7 +63,7 @@ ROOT_URLCONF = 'blogpy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,3 +145,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
